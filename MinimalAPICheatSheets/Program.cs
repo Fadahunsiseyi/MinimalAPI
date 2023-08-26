@@ -44,7 +44,23 @@ app.MapGet("/weatherforecast", (NameService nameService) =>
 //statuscodes
 app.MapGet("/statuscode", (bool ok) => ok ? Results.Ok("Everything is ok!") : Results.BadRequest("Something went wrong!"));
 
+//Routing
+
+app.MapGet("/",()=> get);
+app.MapPost("/",()=> post);
+app.MapPut("/",()=> put);
+app.MapDelete("/",()=> delete);
+
+var personHandler = new PersonHandler();
+app.MapGet("/persons", personHandler.HandleGet);
+app.MapGet("/persons/{id}", personHandler.HandleGetById);
+
 app.Run();
+
+string get() => "Get Called";
+string post() => "Post Called";
+string put() => "Put Called";
+string delete() => "Delete Called";
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
