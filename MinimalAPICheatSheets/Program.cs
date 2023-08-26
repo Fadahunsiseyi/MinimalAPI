@@ -40,6 +40,9 @@ app.MapGet("/weatherforecast", (NameService nameService) =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
+//statuscodes
+app.MapGet("/statuscode", (bool ok) => ok ? Results.Ok("Everything is ok!") : Results.BadRequest("Something went wrong!"));
+
 app.Run();
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
